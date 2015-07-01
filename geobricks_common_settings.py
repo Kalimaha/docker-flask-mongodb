@@ -29,7 +29,7 @@ settings_app = {
             "spatial": {
                 # default_db will search in the dbs["database"] as default option
                 "dbname": "fenix",
-                "host": "localhost",
+                "host": "EXLPRFAOSTAT1.ext.fao.org",
                 "port": "5432",
                 "username": "fenix",
                 "password": "Qwaszx",
