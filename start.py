@@ -1,0 +1,4 @@
+from geobricks_flask_archetype.rest.dummy_rest_engine import start_dummy_rest_engine
+
+
+start_dummy_rest_engine()

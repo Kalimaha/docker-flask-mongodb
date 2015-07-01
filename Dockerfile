@@ -8,5 +8,5 @@ RUN mkdir geobricks
 ADD requirements.txt /geobricks/requirements.txt
 ADD start.py /geobricks/start.py
 RUN pip install -r /geobricks/requirements.txt
-RUN wget https://github.com/Kalimaha/docker-flask-mongodb/archive/no_cherrypy.zip
-RUN unzip no_cherrypy.zip
+# RUN wget https://github.com/Kalimaha/docker-flask-mongodb/archive/no_cherrypy.zip
+# RUN unzip no_cherrypy.zip
