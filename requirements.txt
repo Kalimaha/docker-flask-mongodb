@@ -1,5 +1,8 @@
 watchdog
 Flask
 flask-cors
-https://github.com/geobricks/geobricks_mod16/archive/development.zip
-https://github.com/geobricks/geobricks_flask_archetype/archive/master.zip
+beautifulsoup4
+https://github.com/geobricks/geobricks_common/archive/development.zip
+https://github.com/geobricks/geobricks_modis/archive/development.zip
+https://github.com/geobricks/geobricks_downloader/archive/development.zip
+https://github.com/geobricks/geobricks_rest_engine/archive/development.zip
