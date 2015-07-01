@@ -1,0 +1,7 @@
+web:
+    build: my_application
+    volumes:
+        - my_application:/my_application
+    ports:
+        - "80:5000"
+    command: python /a_la_romana_services/start.py
