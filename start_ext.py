@@ -4,8 +4,9 @@ from geobricks_rest_engine.core.utils import dict_merge
 from geobricks_rest_engine.rest import engine as rest_engine
 import imp
 
-settings_app = imp.load_source('geobricks_common_settings','/geobricks/config/geobricks_common_settings.py')
 
+# TODO: add CLI interface
+settings_app = imp.load_source('geobricks_common_settings','/geobricks/config/geobricks_common_settings.py')
 settings_rest_modules = imp.load_source('geobricks_rest_settings', '/geobricks/config/geobricks_rest_settings.py')
 
 print settings_rest_modules.settings_rest_modules
