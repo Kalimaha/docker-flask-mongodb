@@ -3,6 +3,7 @@ Flask
 flask-cors
 beautifulsoup4
 requests
+uwsgi
 https://github.com/geobricks/geobricks_rest_engine/archive/development.zip
 https://github.com/geobricks/geobricks_common/archive/development.zip
 https://github.com/geobricks/geobricks_modis/archive/development.zip
@@ -12,3 +13,7 @@ https://github.com/geobricks/geobricks_gis_raster/archive/development.zip
 https://github.com/geobricks/geobricks_geostatistics/archive/development.zip
 https://github.com/geobricks/geobricks_dbms/archive/development.zip
 https://github.com/geobricks/geobricks_spatial_query/archive/development.zip
+brewer2mpl
+https://github.com/geobricks/geobricks_mapclassify/archive/development.zip
+geopy
+https://github.com/geobricks/geobricks_geocoding/archive/development.zip

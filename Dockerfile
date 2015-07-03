@@ -20,8 +20,17 @@ RUN apt-get install -y -q build-essential python-gdal python-simplejson
 RUN apt-get install -y python python-pip wget
 RUN apt-get install -y python-numpy python-numpy-dev libgdal1h gdal-bin libgdal-dev
 RUN apt-get install -y libblas-dev liblapack-dev
-RUN apt-get install -y python-dev
+
+# numpy dependency
+RUN apt-get -y install python-dev
+
+# scipy dependency
+RUN apt-get -y install libblas3gf libc6 libgcc1 libgfortran3 liblapack3gf libstdc++6 build-essential gfortran python-all-dev libatlas-base-dev
+RUN apt-get -y install libblas-dev liblapack-dev
+
+# DB connector dependency
 RUN apt-get install -y python-psycopg2
+
 
 # Installing stuff
 
@@ -53,6 +62,10 @@ RUN /geobricks/env/bin/pip install pygdal
 # rasterio
 RUN /geobricks/env/bin/pip install numpy
 RUN /geobricks/env/bin/pip install rasterio
+
+# scipy
+RUN /geobricks/env/bin/pip install scipy
+RUN /geobricks/env/bin/pip install pysal
 
 # Install all the other requirements
 RUN /geobricks/env/bin/pip install -r /geobricks/requirements.txt
