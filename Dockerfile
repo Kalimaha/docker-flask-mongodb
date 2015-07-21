@@ -36,16 +36,13 @@ RUN apt-get install -y python-psycopg2
 
 # Create a working directory.
 RUN mkdir geobricks
+RUN mkdir /geobricks/data
 
 # Install VirtualEnv.
 RUN pip install virtualenv
 
 # Add requirements file.
 ADD requirements.txt /geobricks/requirements.txt
-
-# Add the script that will start everything.
-ADD start.py /geobricks/start.py
-ADD start_ext.py /geobricks/start_ext.py
 
 # Run VirtualEnv.
 RUN virtualenv /geobricks/env/
@@ -68,4 +65,14 @@ RUN /geobricks/env/bin/pip install scipy
 RUN /geobricks/env/bin/pip install pysal
 
 # Install all the other requirements
-RUN /geobricks/env/bin/pip install -r /geobricks/requirements.txt
+RUN /geobricks/env/bin/pip install -r /geobricks/requirements-libs.txt
+RUN /geobricks/env/bin/pip install -r /geobricks/requirements-geobricks.txt
+
+# Install REST Egine
+#RUN /geobricks/env/bin/pip install https://github.com/geobricks/geobricks_rest_engine/archive/development.zip
+
+# Add the script that will start everything.
+ADD start.py /geobricks/start.py
+ADD start_ext.py /geobricks/start_ext.py
+ADD cli.py /geobricks/cli.py
+ADD start_cli.py /geobricks/start_cli.py

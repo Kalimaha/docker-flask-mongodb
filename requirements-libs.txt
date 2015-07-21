@@ -1,0 +1,9 @@
+watchdog
+Flask
+flask-cors
+beautifulsoup4
+requests
+psycopg2
+brewer2mpl
+geopy
+uwsgi
