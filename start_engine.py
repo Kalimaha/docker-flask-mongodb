@@ -2,30 +2,27 @@ from argh import dispatch_commands
 from argh.decorators import named, arg
 import imp
 import subprocess
-import json
 from geobricks_rest_engine.config.common_settings import settings as common_settings
 from geobricks_rest_engine.config.rest_settings import settings as rest_settings
 from geobricks_rest_engine.core.utils import dict_merge
+from geobricks_rest_engine.rest import engine as rest_engine
+
 
 
 @named('corr')
 @arg('--common_settings', help='Common Settings file')
 @arg('--rest_settings',help='Rest Settings file')
-@arg('--processes', help='Processes')
+@arg('--bins',help='Bins')
 def start_engine(**kwargs):
     settings_app = imp.load_source('geobricks_common_settings', kwargs['common_settings'])
     settings_rest_modules = imp.load_source('geobricks_rest_settings', kwargs['rest_settings'])
+    # loading settings
+    common_settings["settings"] = dict_merge(common_settings, settings_app.settings_app)
+    common_settings["settings"] = common_settings["settings"]["settings"]
 
-    # write files
-    with open('/geobricks/config/common_settings.py', 'w') as f:
-        f.write(json.dumps(common_settings))
-
-    with open('/geobricks/config/rest_settings.py', 'w') as f:
-        f.write(json.dumps(rest_settings))
-
-    # run script
-
-    subprocess.call(["sh", "/geobricks/script.sh"])
+    # loading  modules
+    rest_settings["settings"] = dict_merge(rest_settings, settings_rest_modules.settings_rest_modules)
+    rest_settings["settings"] = rest_settings["settings"]["settings"]
 
     # run engine
     #rest_engine.run_engine(False)

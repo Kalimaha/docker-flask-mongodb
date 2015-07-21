@@ -42,7 +42,8 @@ RUN mkdir /geobricks/data
 RUN pip install virtualenv
 
 # Add requirements file.
-ADD requirements.txt /geobricks/requirements.txt
+ADD requirements-libs.txt /geobricks/requirements-libs.txt
+ADD requirements-geobricks.txt /geobricks/requirements-geobricks.txt
 
 # Run VirtualEnv.
 RUN virtualenv /geobricks/env/
@@ -76,3 +77,8 @@ ADD start.py /geobricks/start.py
 ADD start_ext.py /geobricks/start_ext.py
 ADD cli.py /geobricks/cli.py
 ADD start_cli.py /geobricks/start_cli.py
+ADD script.sh /geobricks/script.sh
+ADD start.py /geobricks/start.py
+
+# create config folder for config files
+RUN mkdir /geobricks/config

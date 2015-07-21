@@ -1,0 +1,1 @@
+/geobricks/env/bin/uwsgi --socket 127.0.0.1:21000 -w start:app -p 2
