@@ -3,9 +3,10 @@ from argh.decorators import named, arg
 import imp
 import subprocess
 import json
-from geobricks_rest_engine.config.common_settings import settings as common_settings
-from geobricks_rest_engine.config.rest_settings import settings as rest_settings
-from geobricks_rest_engine.core.utils import dict_merge
+import shutil
+# from geobricks_rest_engine.config.common_settings import settings as common_settings
+# from geobricks_rest_engine.config.rest_settings import settings as rest_settings
+# from geobricks_rest_engine.core.utils import dict_merge
 
 
 @named('corr')
@@ -13,19 +14,12 @@ from geobricks_rest_engine.core.utils import dict_merge
 @arg('--rest_settings',help='Rest Settings file')
 @arg('--processes', help='Processes')
 def start_engine(**kwargs):
-    settings_app = imp.load_source('geobricks_common_settings', kwargs['common_settings'])
-    settings_rest_modules = imp.load_source('geobricks_rest_settings', kwargs['rest_settings'])
-
-    # write files
-    with open('/geobricks/config/common_settings.py', 'w') as f:
-        f.write(json.dumps(common_settings))
-
-    with open('/geobricks/config/rest_settings.py', 'w') as f:
-        f.write(json.dumps(rest_settings))
+    # shutil.copyfile('/geobricks/__init__.py', '/geobricks/config/__init__.py')
+    shutil.copyfile(kwargs['common_settings'], '/geobricks/common_settings.py')
+    shutil.copyfile(kwargs['rest_settings'], '/geobricks/rest_settings.py')
 
     # run script
-
-    subprocess.call(["sh", "/geobricks/script.sh"])
+    subprocess.call(["sh", "/script.sh"])
 
     # run engine
     #rest_engine.run_engine(False)

@@ -72,13 +72,68 @@ RUN /geobricks/env/bin/pip install -r /geobricks/requirements-geobricks.txt
 # Install REST Egine
 #RUN /geobricks/env/bin/pip install https://github.com/geobricks/geobricks_rest_engine/archive/development.zip
 
+# create config folder for config files
+RUN mkdir /geobricks/config
+
+# NGINX
+#RUN apt-get install -y nginx supervisor
+
+# Install Nginx.
+RUN add-apt-repository -y ppa:nginx/stable
+RUN apt-get update
+RUN apt-get install -y nginx
+RUN rm -rf /var/lib/apt/lists/* && \
+  echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+  chown -R www-data:www-data /var/lib/nginx
+
+#ADD nginx-app.conf /geobricks/nginx/nginx-app.conf
+#RUN ln -s /geobricks/nginx/nginx-app.conf /etc/nginx/sites-enabled/
+
+
+
+# install our code
+#ADD nginx-app.conf /geobricks/nginx/nginx-app.conf
+#ADD supervisor-app.conf /geobricks/nginx/supervisor-app.conf
+
+# setup all the configfiles
+#RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+#RUN rm /etc/nginx/sites-enabled/default
+#RUN ln -s /geobricks/nginx/nginx-app.conf /etc/nginx/sites-enabled/
+#RUN ln -s /geobricks/nginx/supervisor-app.conf /etc/supervisor/conf.d/
+
 # Add the script that will start everything.
 ADD start.py /geobricks/start.py
 ADD start_ext.py /geobricks/start_ext.py
 ADD cli.py /geobricks/cli.py
 ADD start_cli.py /geobricks/start_cli.py
 ADD script.sh /geobricks/script.sh
+ADD script.sh script.sh
 ADD start.py /geobricks/start.py
 
-# create config folder for config files
-RUN mkdir /geobricks/config
+# TODO: fix
+ADD start.py start.py
+ADD __init__.py /geobricks/__init__.py
+ADD __init__.py /geobricks/config/__init__.py
+
+
+#expose 80
+#CMD service nginx start
+
+# Define mountable directories.
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+
+# Define working directory.
+# WORKDIR /etc/nginx
+
+
+#RUN rm /etc/nginx/nginx.conf
+COPY nginx-app.conf /etc/nginx/sites-enabled/nginx-app.conf
+COPY uwsgi_params.conf /etc/nginx/uwsgi_params.conf
+
+# Expose ports.
+EXPOSE 80
+
+# Define default command.
+#CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-t"]
+# EXPOSE 443
