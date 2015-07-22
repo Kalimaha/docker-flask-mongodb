@@ -6,11 +6,18 @@ docker build -t geobricks:from_file .
 docker run -it -p 5000:5000 geobricks:from_file python /geobricks/start.py
 ```
 
+# To add a DNS to docker
 ```
 sudo sublime-text /etc/default/docker
 
 # Use DOCKER_OPTS to modify the daemon startup options.
 DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock --dns 168.202.2.78"
+
+# Google DNS
+DOCKER_OPTS="--dns 208.67.222.222 --dns 208.67.220.220"
+  
+# Restart the docker service
+sudo service docker restart
 ```
 
 

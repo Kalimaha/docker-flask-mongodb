@@ -3,6 +3,7 @@ from argh.decorators import named, arg
 import imp
 import subprocess
 import json
+import os
 import shutil
 # from geobricks_rest_engine.config.common_settings import settings as common_settings
 # from geobricks_rest_engine.config.rest_settings import settings as rest_settings
@@ -14,6 +15,8 @@ import shutil
 @arg('--rest_settings',help='Rest Settings file')
 @arg('--processes', help='Processes')
 def start_engine(**kwargs):
+    print kwargs['common_settings']
+    print kwargs['rest_settings']
     # shutil.copyfile('/geobricks/__init__.py', '/geobricks/config/__init__.py')
     shutil.copyfile(kwargs['common_settings'], '/geobricks/common_settings.py')
     shutil.copyfile(kwargs['rest_settings'], '/geobricks/rest_settings.py')
