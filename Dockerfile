@@ -76,8 +76,6 @@ RUN /geobricks/env/bin/pip install -r /geobricks/requirements-geobricks.txt
 RUN mkdir /geobricks/config
 
 # NGINX
-#RUN apt-get install -y nginx supervisor
-
 # Install Nginx.
 RUN add-apt-repository -y ppa:nginx/stable
 RUN apt-get update
@@ -88,18 +86,6 @@ RUN rm -rf /var/lib/apt/lists/* && \
 
 #ADD nginx-app.conf /geobricks/nginx/nginx-app.conf
 #RUN ln -s /geobricks/nginx/nginx-app.conf /etc/nginx/sites-enabled/
-
-
-
-# install our code
-#ADD nginx-app.conf /geobricks/nginx/nginx-app.conf
-#ADD supervisor-app.conf /geobricks/nginx/supervisor-app.conf
-
-# setup all the configfiles
-#RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-#RUN rm /etc/nginx/sites-enabled/default
-#RUN ln -s /geobricks/nginx/nginx-app.conf /etc/nginx/sites-enabled/
-#RUN ln -s /geobricks/nginx/supervisor-app.conf /etc/supervisor/conf.d/
 
 # Add the script that will start everything.
 ADD start.py /geobricks/start.py
