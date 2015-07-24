@@ -31,6 +31,7 @@ RUN apt-get -y install libblas-dev liblapack-dev
 # DB connector dependency
 RUN apt-get install -y python-psycopg2
 
+
 # Installing stuff
 
 # Create a working directory.
@@ -71,6 +72,9 @@ RUN /geobricks/env/bin/pip install -r /geobricks/requirements-geobricks.txt
 # Install REST Egine
 #RUN /geobricks/env/bin/pip install https://github.com/geobricks/geobricks_rest_engine/archive/development.zip
 
+# create config folder for config files
+RUN mkdir /geobricks/config
+
 # NGINX
 # Install Nginx.
 RUN add-apt-repository -y ppa:nginx/stable
@@ -80,22 +84,37 @@ RUN rm -rf /var/lib/apt/lists/* && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
   chown -R www-data:www-data /var/lib/nginx
 
-# NGINX configuration
-COPY nginx-app.conf /etc/nginx/sites-enabled/nginx-app.conf
-COPY uwsgi_params.conf /etc/nginx/uwsgi_params.conf
+#ADD nginx-app.conf /geobricks/nginx/nginx-app.conf
+#RUN ln -s /geobricks/nginx/nginx-app.conf /etc/nginx/sites-enabled/
 
 # Add the script that will start everything.
-ADD geobricks.py /geobricks/geobricks.py
-ADD startup.sh /geobricks/startup.sh
-ADD run_geobricks_engine.py /geobricks/run_geobricks_engine.py
+ADD start.py /geobricks/start.py
+ADD start_ext.py /geobricks/start_ext.py
+ADD cli.py /geobricks/cli.py
+ADD start_cli.py /geobricks/start_cli.py
+ADD script.sh /geobricks/script.sh
+ADD script.sh script.sh
+ADD start.py /geobricks/start.py
+
+# TODO: fix
+ADD start.py start.py
 ADD __init__.py /geobricks/__init__.py
+ADD __init__.py /geobricks/config/__init__.py
+
+
+#expose 80
+#CMD service nginx start
 
 # Define mountable directories.
-# TODO: is it needed?
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
 
 # Define working directory.
 # WORKDIR /etc/nginx
+
+
+#RUN rm /etc/nginx/nginx.conf
+COPY nginx-app.conf /etc/nginx/sites-enabled/nginx-app.conf
+COPY uwsgi_params.conf /etc/nginx/uwsgi_params.conf
 
 # Expose ports.
 EXPOSE 80
