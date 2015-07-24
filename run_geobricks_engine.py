@@ -2,8 +2,8 @@ from geobricks_rest_engine.core.utils import dict_merge
 from geobricks_rest_engine.config.common_settings import settings as common_settings
 from geobricks_rest_engine.config.rest_settings import settings as rest_settings
 from geobricks_rest_engine.core.utils import dict_merge
-from common_settings import settings_app
-from rest_settings import settings_rest_modules
+from common_settings import settings as settings_app
+from rest_settings import settings as settings_rest_modules
 from geobricks_rest_engine.rest import engine
 
 # loading settings
