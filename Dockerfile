@@ -36,6 +36,10 @@ RUN apt-get install -y python-psycopg2
 # Create a working directory.
 RUN mkdir geobricks
 RUN mkdir /geobricks/data
+RUN mkdir /geobricks/data/geoserver
+RUN mkdir /geobricks/data/distribution
+RUN mkdir /geobricks/data/distribution_sld
+RUN mkdir /geobricks/data/storage
 
 # Install VirtualEnv.
 RUN pip install virtualenv

@@ -10,3 +10,4 @@ https://github.com/geobricks/geobricks_spatial_query/archive/development.zip
 https://github.com/geobricks/geobricks_mapclassify/archive/development.zip
 https://github.com/geobricks/geobricks_geocoding/archive/development.zip
 https://github.com/geobricks/geobricks_raster_correlation/archive/development.zip
+https://github.com/geobricks/geobricks_processing/archive/development.zip

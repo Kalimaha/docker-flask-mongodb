@@ -2,6 +2,7 @@ watchdog
 Flask
 flask-cors
 beautifulsoup4
+bson
 requests
 psycopg2
 brewer2mpl
